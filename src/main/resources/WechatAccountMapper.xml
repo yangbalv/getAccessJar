@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wmrx.getaccess.dao.IWechatAccountDao">
+
+    <resultMap id="WechatAccountConfigureResultMap" type="cn.wmrx.getaccess.model.WechatAccount">
+        <id property="generateNo" column="generateNo" javaType="string" jdbcType="VARCHAR"/>
+        <result property="appId" column="appId" javaType="string" jdbcType="VARCHAR"/>
+        <result property="appSecret" column="appSecret" javaType="string" jdbcType="VARCHAR"/>
+        <result property="token" column="token" javaType="string" jdbcType="VARCHAR"/>
+        <result property="serverUrl" column="serverUrl" javaType="string" jdbcType="VARCHAR"/>
+        <result property="encodingAesKey" column="encodingAesKey" javaType="string" jdbcType="VARCHAR"/>
+        <result property="encodingAesMode" column="encodingAesMode" javaType="string" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <sql id="developInfo_columns">
+        appId
+        ,
+	    appSecret,
+	    token,
+	    encodingAesMode,
+	    encodingAesKey,
+	    serverUrl,
+    </sql>
+
+    <select id="getConfigureByGenerateNo" parameterType="string" resultMap="WechatAccountConfigureResultMap">
+        select
+        <include refid="developInfo_columns"/>
+        generateNo
+        from wechat_accounts
+        where generateNo = #{generateNo, jdbcType=VARCHAR}
+    </select>
+
+</mapper>

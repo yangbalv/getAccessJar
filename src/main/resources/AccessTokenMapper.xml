@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.wmrx.getaccess.dao.IAccessTokenDAO">
+
+    <resultMap id="AccessTokenMap" type="cn.wmrx.getaccess.model.AccessToken">
+        <id property="generateNo" column="generateNo" javaType="string" jdbcType="VARCHAR"/>
+        <result property="accessToken" column="accessToken" javaType="string" jdbcType="VARCHAR"/>
+        <result property="expiresIn" column="expiresIn" javaType="_int" jdbcType="INTEGER"/>
+        <result property="freshTime" column="freshTime" javaType="_long" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.wmrx.getaccess.model.AccessToken">
+		<![CDATA[
+        insert into wechat_access_token
+        (generateNo,
+         accessToken,
+         expiresIn,
+         freshTime)
+        values (#{generateNo, javaType=string, jdbcType=VARCHAR},
+                #{accessToken, javaType=string, jdbcType=VARCHAR},
+                #{expiresIn, javaType=_int, jdbcType=INTEGER},
+                #{freshTime, javaType=_long, jdbcType=BIGINT})
+        ]]>
+	</insert>
+
+    <select id="selectById" parameterType="string" resultMap="AccessTokenMap">
+		<![CDATA[
+        select generateNo,
+               accessToken,
+               expiresIn,
+               freshTime
+        from wechat_access_token
+        where generateNo = #{generateNo, javaType=string, jdbcType=VARCHAR}
+        ]]>
+	</select>
+
+
+
+
+
+    <select id="selectByIdForUpdate" parameterType="string" resultMap="AccessTokenMap">
+		<![CDATA[
+        select generateNo,
+               accessToken,
+               expiresIn,
+               freshTime
+        from wechat_access_token
+        where generateNo = #{generateNo, javaType=string, jdbcType=VARCHAR}
+            for update nowait
+        ]]>
+	</select>
+    <!--	20230306 改动结束-->
+
+    <update id="update" parameterType="cn.wmrx.getaccess.model.AccessToken">
+		<![CDATA[
+        update
+            wechat_access_token
+        set accessToken=#{accessToken, javaType=string, jdbcType=VARCHAR},
+            expiresIn=#{expiresIn, javaType=_int, jdbcType=INTEGER},
+            freshTime=#{freshTime, javaType=_long, jdbcType=BIGINT}
+        where generateNo = #{generateNo, javaType=string, jdbcType=VARCHAR}
+        ]]>
+	</update>
+
+</mapper>

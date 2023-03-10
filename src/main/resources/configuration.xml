@@ -6,19 +6,21 @@
     <!-- 对事务的管理和连接池的配置 -->
     <environments default="development">
         <environment id="development">
-            <transactionManager type="JDBC" />
+            <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-
-                <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://175.24.175.180:3306/chapter05-1?useUnicode=true&amp;useSSL=false" />
-                <property name="username" value="test" />
-                <property name="password" value="123" />
+                <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+                <property name="url"
+                          value="jdbc:oracle:thin:@39.105.161.117:1521:orcl"/>
+                <property name="username" value="wxusr"/>
+                <property name="password" value="wxusr"/>
             </dataSource>
         </environment>
     </environments>
 
     <!-- mapping 文件路径配置 -->
     <mappers>
-        <mapper resource="userMapper.xml" />
+
+        <mapper resource="AccessTokenMapper.xml"/>
+        <mapper resource="WechatAccountMapper.xml"/>
     </mappers>
 </configuration>

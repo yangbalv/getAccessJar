@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package cn.wmrx.getaccess.model;
 
 import java.io.Serializable;
